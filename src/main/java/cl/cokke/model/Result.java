@@ -2,6 +2,8 @@ package cl.cokke.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+
 import lombok.Data;
 
 @Data
