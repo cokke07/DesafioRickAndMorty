@@ -56,16 +56,16 @@ public class CharacterServiceImp implements CharacterService{
 	        
 	        lista = response.getBody().getResults();
 	        
-	        for (Result result : lista) {
-	        	Personajes p = new Personajes();
-	        	p.setName(result.getName());
-	        	p.setStatus(result.getStatus());
-	        	p.setGender(result.getGender());
-	        	p.setImage(result.getImage());
-	        	personajeService.guardar(p);
-	        		        	
-			}
-	        System.out.println(lista);
+			
+			for (Result result : lista) { Personajes p = new Personajes();
+				p.setName(result.getName()); 
+				p.setStatus(result.getStatus());
+				p.setGender(result.getGender()); 
+				p.setImage(result.getImage());
+				personajeService.guardar(p);
+			 }
+			 
+	        //System.out.println(response.getBody().getResults().get(19));
 	        
 	        return response.getBody();
 	}
