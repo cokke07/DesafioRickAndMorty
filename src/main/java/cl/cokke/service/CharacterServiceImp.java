@@ -23,6 +23,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import cl.cokke.entity.Personajes;
 import cl.cokke.model.Character;
 import cl.cokke.model.Result;
 
@@ -35,7 +36,8 @@ public class CharacterServiceImp implements CharacterService{
 	@Autowired
 	private HttpHeaders httpHeaders;
 	
-	
+	@Autowired
+	private PersonajesService personajeService;
 	
 	private static final String URL_API="https://rickandmortyapi.com/api/character";
 	
@@ -51,8 +53,20 @@ public class CharacterServiceImp implements CharacterService{
 	        
 	        List<Result> lista = new ArrayList<>();
 	        
+	        
 	        lista = response.getBody().getResults();
-	        System.out.println(lista.toString());
+	        
+	        for (Result result : lista) {
+	        	Personajes p = new Personajes();
+	        	p.setName(result.getName());
+	        	p.setStatus(result.getStatus());
+	        	p.setGender(result.getGender());
+	        	p.setImage(result.getImage());
+	        	personajeService.guardar(p);
+	        		        	
+			}
+	        System.out.println(lista);
+	        
 	        return response.getBody();
 	}
 

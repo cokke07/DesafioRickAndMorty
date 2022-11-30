@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 import lombok.Data;
 
-@Data
 @JsonIgnoreType
+@Data
 public class Info {
 
 	private Integer count;
