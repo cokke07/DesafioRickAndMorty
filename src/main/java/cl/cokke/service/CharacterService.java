@@ -9,6 +9,6 @@ import cl.cokke.model.Result;
 
 public interface CharacterService {
 
-	public Character getAllCharacters();
+	public Character uploadCharacter();
 	public void save(List<Result> listaResult);
 }

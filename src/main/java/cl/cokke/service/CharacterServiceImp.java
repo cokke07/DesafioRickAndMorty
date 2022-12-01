@@ -2,26 +2,17 @@ package cl.cokke.service;
 
 
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import cl.cokke.entity.Personajes;
 import cl.cokke.model.Character;
@@ -42,7 +33,7 @@ public class CharacterServiceImp implements CharacterService{
 	private static final String URL_API="https://rickandmortyapi.com/api/character";
 	
 	@Override
-	public Character getAllCharacters() {
+	public Character uploadCharacter() {
 	
 		  	httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
 

@@ -1,8 +1,10 @@
 package cl.cokke.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import cl.cokke.entity.Personajes;
@@ -15,15 +17,34 @@ public class PersonajesServiceImp implements PersonajesService {
 	private PersonajeRepository personajeRepository;
 	
 	@Override
-	public List<Personajes> findAll() {
-		// TODO Auto-generated method stub
+	public List<Personajes> cargarData() {
+			return personajeRepository.findAll();
+	}
+
+	@Override
+	public Personajes guardar(Personajes ps) {	
+		return personajeRepository.save(ps);
+	}
+
+	@Override
+	public Personajes actualizar(Personajes ps) {	
+		return personajeRepository.save(ps);
+	}
+
+	@Override
+	public List<Personajes> buscarTodos() {
 		return personajeRepository.findAll();
 	}
 
 	@Override
-	public Personajes guardar(Personajes ps) {
-		
-		return personajeRepository.save(ps);
+	public Optional<Personajes> buscarPorId(Integer id) {
+		return personajeRepository.findById(id);
+	}
+
+	@Override
+	public HttpStatus eliminarPersonaje(Integer id) {
+		personajeRepository.deleteById(id);
+		return null;
 	}
 
 }
