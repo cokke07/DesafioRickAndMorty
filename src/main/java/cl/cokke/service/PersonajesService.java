@@ -15,5 +15,6 @@ public interface PersonajesService {
 	public List<Personajes> buscarTodos();
 	public Optional<Personajes> buscarPorId(Integer id);
 	public HttpStatus eliminarPersonaje(Integer id); 
+	public Personajes findByStatusOrGender(String textoBuscado);
 	
 }

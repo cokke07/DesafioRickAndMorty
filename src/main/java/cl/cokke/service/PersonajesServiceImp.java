@@ -1,5 +1,6 @@
 package cl.cokke.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +46,13 @@ public class PersonajesServiceImp implements PersonajesService {
 	public HttpStatus eliminarPersonaje(Integer id) {
 		personajeRepository.deleteById(id);
 		return null;
+	}
+
+	@Override
+	public Personajes findByStatusOrGender(String textoBuscado) {
+		Personajes encontrado = personajeRepository.findByStatusOrGender(textoBuscado, textoBuscado);
+		
+		return encontrado;
 	}
 
 }

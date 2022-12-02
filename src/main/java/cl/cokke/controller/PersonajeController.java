@@ -1,5 +1,6 @@
 package cl.cokke.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,9 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.cokke.entity.Personajes;
@@ -35,7 +38,7 @@ public class PersonajeController {
 	}
 	
 	@GetMapping("/character/{id}")
-	public ResponseEntity<Personajes> buscarPorId(@PathVariable("id") Integer id){
+	public ResponseEntity<Personajes> buscarPorId(@PathVariable(name= "id") Integer id){
 		Optional<Personajes> pEncontrado = personajeService.buscarPorId(id);
 		
 		if(pEncontrado.isPresent()) {
@@ -45,6 +48,8 @@ public class PersonajeController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}	
 	}
+	
+	
 	
 	@PutMapping("/character/{id}")
 	public ResponseEntity<Personajes> actualizaPersonaje(@RequestBody Personajes p, @PathVariable("id") Integer id ){
@@ -71,4 +76,18 @@ public class PersonajeController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);	
 		}
 	}
+	
+	@GetMapping("/character/{texto}")
+	public ResponseEntity<Personajes> buscarPorGenderOrStatus(@RequestParam("texto") String texto) {
+		Personajes personajeEncontrado = personajeService.findByStatusOrGender(texto);
+		
+	
+		return new ResponseEntity<>(personajeEncontrado, HttpStatus.OK);
+		
+		
+	}
+	
+	
+	
+	
 }
