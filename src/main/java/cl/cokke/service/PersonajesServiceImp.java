@@ -49,10 +49,9 @@ public class PersonajesServiceImp implements PersonajesService {
 	}
 
 	@Override
-	public Personajes findByStatusOrGender(String textoBuscado) {
-		Personajes encontrado = personajeRepository.findByStatusOrGender(textoBuscado, textoBuscado);
+	public List<Personajes> findByStatusOrGender(String textoBuscado) {
 		
-		return encontrado;
+		return personajeRepository.findByStatusOrGender(textoBuscado, textoBuscado);
 	}
 
 }

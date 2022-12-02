@@ -77,12 +77,11 @@ public class PersonajeController {
 		}
 	}
 	
-	@GetMapping("/character/{texto}")
-	public ResponseEntity<Personajes> buscarPorGenderOrStatus(@RequestParam("texto") String texto) {
-		Personajes personajeEncontrado = personajeService.findByStatusOrGender(texto);
-		
-	
-		return new ResponseEntity<>(personajeEncontrado, HttpStatus.OK);
+	@GetMapping("/character/text")
+	public ResponseEntity<List<Personajes>> buscarPorGenderOrStatus(@RequestParam("texto") String texto) {
+		 List<Personajes> personajesEncontrados =personajeService.findByStatusOrGender(texto);
+		 System.out.println(personajesEncontrados);
+		return new ResponseEntity<>(personajesEncontrados, HttpStatus.OK);
 		
 		
 	}

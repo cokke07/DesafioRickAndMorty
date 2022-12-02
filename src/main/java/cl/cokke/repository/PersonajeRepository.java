@@ -10,5 +10,5 @@ import cl.cokke.entity.Personajes;
 @Repository
 public interface PersonajeRepository extends JpaRepository<Personajes, Integer> {
 
-	public Personajes findByStatusOrGender(String texto1, String Texto2);
+	public List<Personajes> findByStatusOrGender(String texto1, String Texto2);
 }
