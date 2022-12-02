@@ -77,7 +77,7 @@ public class PersonajeController {
 		}
 	}
 	
-	@GetMapping("/character/text")
+	@GetMapping("/character/")
 	public ResponseEntity<List<Personajes>> buscarPorGenderOrStatus(@RequestParam("texto") String texto) {
 		 List<Personajes> personajesEncontrados =personajeService.findByStatusOrGender(texto);
 		 System.out.println(personajesEncontrados);
