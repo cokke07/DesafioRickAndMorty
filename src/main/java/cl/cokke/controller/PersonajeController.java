@@ -81,12 +81,16 @@ public class PersonajeController {
 	public ResponseEntity<List<Personajes>> buscarPorGenderOrStatus(@RequestParam("texto") String texto) {
 		 List<Personajes> personajesEncontrados =personajeService.findByStatusOrGender(texto);
 		 System.out.println(personajesEncontrados);
-		return new ResponseEntity<>(personajesEncontrados, HttpStatus.OK);
-		
-		
+		return new ResponseEntity<>(personajesEncontrados, HttpStatus.OK);		
 	}
 	
-	
+	@GetMapping("/character/ids/{id}/{id2}")
+	public ResponseEntity<List<?>> buscarPorVariosId(
+			@PathVariable(name= "id") Integer id,@PathVariable(name= "id2") Integer id2){
+		List<Optional<Personajes>> pEncontrados = personajeService.buscarPorVariosId(id, id2);
+		System.out.println(pEncontrados.toString());
+		return new ResponseEntity<>(pEncontrados,HttpStatus.OK);
+	}
 	
 	
 }
