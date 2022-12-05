@@ -1,5 +1,6 @@
 package cl.cokke.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +40,7 @@ public class PersonajeController {
 	}
 	
 	@GetMapping("/character/{id}")
-	public ResponseEntity<Personajes> buscarPorId(@PathVariable("id") Integer id){
+	public ResponseEntity<Personajes> buscarPorId(@PathVariable(name= "id") Integer id){
 		Optional<Personajes> pEncontrado = personajeService.buscarPorId(id);
 		
 		if(pEncontrado.isPresent()) {
@@ -71,4 +76,20 @@ public class PersonajeController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);	
 		}
 	}
+
+	@GetMapping("/character/")
+	public ResponseEntity<List<Personajes>> buscarPorGenderOrStatus(@RequestParam("texto") String texto) {
+		 List<Personajes> personajesEncontrados =personajeService.findByStatusOrGender(texto);
+		 System.out.println(personajesEncontrados);
+		return new ResponseEntity<>(personajesEncontrados, HttpStatus.OK);		
+	}
+	
+	@GetMapping("/character/ids/{id}/{id2}")
+	public ResponseEntity<List<?>> buscarPorVariosId(
+			@PathVariable(name= "id") Integer id,@PathVariable(name= "id2") Integer id2){
+		List<Optional<Personajes>> pEncontrados = personajeService.buscarPorVariosId(id, id2);
+		System.out.println(pEncontrados.toString());
+		return new ResponseEntity<>(pEncontrados,HttpStatus.OK);
+	}
+	
 }
