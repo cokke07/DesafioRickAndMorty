@@ -12,6 +12,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import cl.cokke.security.JwtTokenFilterConfigurer;
+import cl.cokke.security.JwtTokenProvider;
+
 
 @Configuration
 public class WebSecurityConfig {
@@ -25,12 +28,8 @@ public class WebSecurityConfig {
 		http.csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authorizeRequests()
-		.antMatchers("/swagger-ui/**").permitAll()
-		.antMatchers("/docs/**").permitAll()
 		.antMatchers("/auth/**").permitAll()
 		.anyRequest().authenticated();
-		//.antMatchers("/api/v1/disney/**").permitAll()
-		
 
 		http.exceptionHandling().accessDeniedPage("/login");
 		http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
