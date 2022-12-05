@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.cokke.entity.Personajes;
@@ -49,8 +51,6 @@ public class PersonajeController {
 		}	
 	}
 	
-	
-	
 	@PutMapping("/character/{id}")
 	public ResponseEntity<Personajes> actualizaPersonaje(@RequestBody Personajes p, @PathVariable("id") Integer id ){
 		Optional<Personajes> pEncontrado = personajeService.buscarPorId(id);
@@ -76,7 +76,7 @@ public class PersonajeController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);	
 		}
 	}
-	
+
 	@GetMapping("/character/")
 	public ResponseEntity<List<Personajes>> buscarPorGenderOrStatus(@RequestParam("texto") String texto) {
 		 List<Personajes> personajesEncontrados =personajeService.findByStatusOrGender(texto);
@@ -91,6 +91,5 @@ public class PersonajeController {
 		System.out.println(pEncontrados.toString());
 		return new ResponseEntity<>(pEncontrados,HttpStatus.OK);
 	}
-	
 	
 }
