@@ -28,6 +28,8 @@ public class WebSecurityConfig {
 		http.csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authorizeRequests()
+		.antMatchers("/swagger-ui/**").permitAll()
+		.antMatchers("/docs/**").permitAll()
 		.antMatchers("/auth/**").permitAll()
 		.anyRequest().authenticated();
 
