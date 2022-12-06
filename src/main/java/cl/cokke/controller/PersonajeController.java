@@ -14,8 +14,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import cl.cokke.entity.Personajes;
+import cl.cokke.model.Character;
 import cl.cokke.service.PersonajesService;
 
 @RestController
@@ -25,6 +32,16 @@ public class PersonajeController {
 	@Autowired
 	private PersonajesService personajeService;
 	
+	//Documentacion de Path
+			@Operation(
+					security = {@SecurityRequirement(name = "Bearer") }
+					,summary = "Listar personajes desde la API local"
+					, description = "<h3>Endpoint encargado de listar los personajes desde la base de datos</h3>")
+			@ApiResponses(value = { 
+				@ApiResponse(responseCode = "200", description = "OK", content = {
+						@Content(mediaType = "application/json", schema = 
+								@Schema(implementation = Personajes.class)) }) })	
+			//Fin documentacion de path
 	@GetMapping("character")
 	public ResponseEntity<List<Personajes>> buscarTodos(){
 		
