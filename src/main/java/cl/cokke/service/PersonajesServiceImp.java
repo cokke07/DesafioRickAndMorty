@@ -48,7 +48,6 @@ public class PersonajesServiceImp implements PersonajesService {
 		return null;
 	}
 
-
 	@Override
 	public List<Personajes> findByStatusOrGender(String textoBuscado) {
 		
